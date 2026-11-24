@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/youruser/myapp
+    repoURL: https://github.com/Group-18-M7011E/Web_Application.git
     targetRevision: main
     path: .
   destination:
