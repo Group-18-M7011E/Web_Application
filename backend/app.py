@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/api/hello")
 def hello():
-    return {"msg": "hello"}
+    return {"msg": "hello; GMX Fisch see below"}
 
 if __name__ == "__main__":
     # local dev only: gunicorn in the cluster never runs this block
