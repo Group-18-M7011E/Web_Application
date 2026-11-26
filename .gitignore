@@ -1,3 +1,13 @@
 .venv/
 __pycache__/
 .DS_Store
+
+# Backend tests
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Frontend
+node_modules/
+dist/

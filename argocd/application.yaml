@@ -8,7 +8,8 @@ spec:
   source:
     repoURL: https://github.com/Group-18-M7011E/Web_Application.git
     targetRevision: main
-    path: .
+    # Argo CD detects the Chart.yaml in this folder and renders it with Helm (values.yaml).
+    path: charts/outlift
   destination:
     server: https://kubernetes.default.svc
     namespace: myapp

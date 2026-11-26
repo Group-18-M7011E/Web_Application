@@ -1,18 +1,20 @@
-from flask import Flask, send_from_directory
+from flask import Flask
+
 app = Flask(__name__)
 
-@app.route("/api/hello")
+
+@app.get("/api/hello")
 def hello():
     return {"msg": "hello; GMX Fisch see below"}
 
+
+@app.get("/api/health")
+def health():
+    # Used by the Kubernetes readiness and liveness probes.
+    return {"status": "ok"}
+
+
 if __name__ == "__main__":
-    # local dev only: gunicorn in the cluster never runs this block
-    @app.route("/")
-    def index():
-        return send_from_directory("../frontend", "index.html")
-
-    @app.route("/<path:p>")
-    def static_files(p):
-        return send_from_directory("../frontend", p)
-
-    app.run(port=5000, debug=True)
+    # Local development only. In the container, gunicorn imports `app` and never runs this block.
+    # Port 5001, not 5000: on macOS the AirPlay Receiver already listens on 5000 and answers with 403.
+    app.run(port=5001, debug=True)

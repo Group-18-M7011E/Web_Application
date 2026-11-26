@@ -1,0 +1,32 @@
+domain: group-18-m7011e-ltu.se
+
+ingress:
+  # Kept identical to the earlier Kustomize setup so Argo CD updates the existing resources
+  # and cert-manager keeps using the certificate that is already issued.
+  name: myapp
+  tlsSecretName: myapp-tls
+  clusterIssuer: letsencrypt-prod
+  # Answer plain HTTP requests with a redirect to HTTPS (Traefik middleware).
+  redirectToHttps: true
+
+backend:
+  replicas: 1
+  image:
+    repository: ghcr.io/group-18-m7011e/outlift-backend
+    # CI replaces this with the commit SHA after every successful build on main.
+    tag: latest
+  port: 5000
+  resources:
+    requests: { cpu: 50m, memory: 64Mi }
+    limits: { memory: 256Mi }
+
+frontend:
+  replicas: 1
+  image:
+    repository: ghcr.io/group-18-m7011e/outlift-frontend
+    # CI replaces this with the commit SHA after every successful build on main.
+    tag: latest
+  port: 8080
+  resources:
+    requests: { cpu: 10m, memory: 32Mi }
+    limits: { memory: 64Mi }
